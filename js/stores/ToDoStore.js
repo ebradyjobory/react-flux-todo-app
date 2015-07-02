@@ -1,24 +1,40 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
+var TodoConstants = require('../constants/TodoConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var Firebase = require('firebase');
 
-var _toDoList = {};
+var _todos = {};
 
-var create = function (text) {
-  var id = (+new Date()+ Math.floor(Math.random() * 9999999)).toString(36);
-  var fb = new Firebase('https://reactnotetaker.firebaseio.com');
-  fb.child(id).set(text);
+
+function create(text) {
+  var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+  _todos[id] = {
+    id: id,
+    complete: false,
+    text: text
+  };
+}
+
+var fetchAllData = function () {
+  console.log('called')
 };
 
 var TodoStore = assign({}, EventEmitter.prototype, {
 
-  getAll: function () {
-    return _toDoList;
+  getAll: function() {
+    return _todos;
   },
 
   emitChange: function() {
-    this.emit('create');
+    this.emit('change');
+  },
+
+  addChangeListener: function(callback) {
+    this.on('change', callback);
+  },
+
+  areAllComplete: function () {
+    return true;
   }
 
 });

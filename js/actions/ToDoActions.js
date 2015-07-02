@@ -7,8 +7,7 @@ var ToDoActions = {
       actionType: 'create',
       text: text
     });
-  },
-
+  }
 };
 
 module.exports = ToDoActions;

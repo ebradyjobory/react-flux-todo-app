@@ -1,39 +1,40 @@
 var React = require('react');
 
-var ToDoInputText = React.createClass ({
+var TodoTextInput = React.createClass({
 
   getInitialState: function () {
     return {
       value: this.props.value || ''
-    };
+    }
   },
 
-  _save: function () {
+  _save: function() {
     this.props.onSave(this.state.value);
     this.setState({
       value: ''
-    })
+    });
   },
 
-  _change: function (e) {
+  _onChange: function(event) {
     this.setState({
-      value: e.target.value
-    })
+      value: event.target.value
+    });
   },
+
   render: function () {
     return(
       <input
         className={this.props.className}
         id={this.props.id}
-        placeholder={this.props.placeholder}
-        value={this.state.value}
+        placeholer={this.props.placeholder}
         onBlur={this._save}
-        onChange={this._change}
+        onChange={this._onChange}
+        onKeyDown={this._onKeyDown}
+        value={this.state.value}
         autoFocus={true}
       />
-    );
+    )
   }
-
 });
 
-module.exports = ToDoInputText;
+module.exports = TodoTextInput;
