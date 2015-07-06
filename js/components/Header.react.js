@@ -4,9 +4,6 @@ var TodoTextInput = require('./TodoTextInput.react');
 
 var Header = React.createClass({
 
-  /**
-   * @return {object}
-   */
   render: function() {
     return (
       <header id="header">

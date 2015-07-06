@@ -21,6 +21,12 @@ var TodoTextInput = React.createClass({
     });
   },
 
+  _onKeyDown: function(event) {
+    if (event.keyCode === 13) {
+      this._save();
+    }
+  },
+
   render: function () {
     return(
       <input
